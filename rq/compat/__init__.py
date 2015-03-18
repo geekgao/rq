@@ -3,6 +3,7 @@ from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import sys
+import functools
 
 
 def is_python_version(*versions):
@@ -65,7 +66,7 @@ if not PY2:
         return dict((as_text(k), h[k]) for k in h)
 else:
     # Python 2.x
-    text_type = unicode
+    text_type = functools.partial(unicode, encoding='utf-8')
     string_types = (str, unicode)
 
     def as_text(v):
